@@ -5,6 +5,7 @@ import br.com.brunadelmouro.msclientes.model.Cliente;
 import br.com.brunadelmouro.msclientes.service.ClienteService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,17 @@ import java.net.URI;
 @RestController
 @RequestMapping("/clientes")
 @RequiredArgsConstructor
+@Slf4j
 public class ClienteController {
 
     private final ModelMapper modelMapper;
     private final ClienteService clienteService;
+
+    @GetMapping
+    public String status(){
+        log.info("TESTANDO LOAD BALANCER - obtendo status do serviço de msclientes");
+        return "Ok";
+    }
 
     @PostMapping
     public ResponseEntity<Cliente> saveCustomer(@RequestBody ClienteRequest clienteRequest){
@@ -35,7 +43,7 @@ public class ClienteController {
         return ResponseEntity.created(headerLocation).build();
     }
 
-    @GetMapping
+    @GetMapping(params = "cpf")
     public ResponseEntity<Cliente> getCustomerByCpf(@RequestParam("cpf") String cpf) {
         var cliente = clienteService.findByCpf(cpf);
 
