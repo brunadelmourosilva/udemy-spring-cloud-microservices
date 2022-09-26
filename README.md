@@ -6,7 +6,11 @@
 Microsserviço que realizará o gerencimento das instâncias criadas do microsserviço msclientes.
 
 ### :arrow_right: msclientes: 
-Microsserviço que realiza a lógica da aplicação, com as devidas regras de negócio e endpoints. Além disso, o microsserviço do tipo _client_ poderá 
+Microsserviço que realiza a lógica da aplicação para o cadastro dos clientes, com as devidas regras de negócio e endpoints. Além disso, o microsserviço do tipo _client_ poderá 
+fornecer várias instâncias do mesmo e será gerenciado pelo eureka server.
+
+### :arrow_right: mscartoes: 
+Microsserviço que realiza a lógica da aplicação para os tipos de pagamento, com as devidas regras de negócio e endpoints. Além disso, o microsserviço do tipo _client_ poderá 
 fornecer várias instâncias do mesmo e será gerenciado pelo eureka server.
 
 ### :arrow_right: mscloudgateway: 
