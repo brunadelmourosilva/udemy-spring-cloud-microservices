@@ -17,7 +17,7 @@ realizando dessa forma, o roteamento/encaminhamento para a instância do micross
 
 ### Testando Load Balancer
 
-1. Subir, por exemplo, 3 instâncias no msclientes, por meio do comando ./mvnw spring-boot:run
+1. Subir, por exemplo, 3 instâncias no msclientes, por meio do comando ```./mvnw spring-boot:run```
 2. Subir mscloudgateway
 3. Realizar uma requisição e observar por meio dos logs das 3 instâncias, em qual delas a requisição foi direcionada
 4. Realizar a ação novamente para observar tais comportamentos
