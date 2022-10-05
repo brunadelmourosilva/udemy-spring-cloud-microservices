@@ -20,7 +20,7 @@ public class CartaoService {
         return cartaoRepository.save(cartao);
     }
 
-    public List<Cartao> getCardsWageLessThanEqual(Long renda) {
+    public List<Cartao> getCardsByIncomeLessThanEqual(Long renda) {
         var wageBigDecimal = BigDecimal.valueOf(renda);
 
         return cartaoRepository.findByRendaLessThanEqual(wageBigDecimal);

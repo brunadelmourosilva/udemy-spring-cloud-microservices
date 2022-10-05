@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/cartoes")
 @AllArgsConstructor
@@ -30,5 +32,12 @@ public class CartaoController {
         cartao = cartaoService.saveCard(cartao);
 
         return new ResponseEntity<>(cartao, HttpStatus.CREATED);
+    }
+
+    @GetMapping(params = "renda")
+    public ResponseEntity<List<Cartao>> getCardsByIncomeLessThanEqual(@RequestParam("renda") Long renda) {
+        var cartoes = cartaoService.getCardsByIncomeLessThanEqual(renda);
+
+        return new ResponseEntity<>(cartoes, HttpStatus.OK);
     }
 }
