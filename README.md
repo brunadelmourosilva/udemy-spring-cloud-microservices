@@ -17,8 +17,11 @@ fornecer várias instâncias do mesmo e será gerenciado pelo eureka server.
 Microsserviço que realiza a lógica da aplicação para os tipos de pagamento, com as devidas regras de negócio e endpoints. Além disso, o microsserviço do tipo _client_ poderá 
 fornecer várias instâncias do mesmo e será gerenciado pelo eureka server.
 
-
 ----
+
+## Arquitetura
+![arquitetura_inicial](https://user-images.githubusercontent.com/61791877/195881284-7f691772-fec4-46dc-8500-f1cc1906994b.png)
+
 
 ### Testando Load Balancer
 
