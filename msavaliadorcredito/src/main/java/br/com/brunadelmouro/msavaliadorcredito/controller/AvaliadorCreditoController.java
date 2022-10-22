@@ -1,6 +1,6 @@
 package br.com.brunadelmouro.msavaliadorcredito.controller;
 
-import br.com.brunadelmouro.msavaliadorcredito.AvaliadorCreditoService;
+import br.com.brunadelmouro.msavaliadorcredito.service.AvaliadorCreditoService;
 import br.com.brunadelmouro.msavaliadorcredito.model.SituacaoCliente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AvaliadorCreditoController {
 
-    AvaliadorCreditoService avaliadorCreditoService;
+    private final AvaliadorCreditoService avaliadorCreditoService;
 
     @GetMapping
     public String status() {
