@@ -1,5 +1,7 @@
 package br.com.brunadelmouro.msavaliadorcredito.controller;
 
+import br.com.brunadelmouro.msavaliadorcredito.exception.DadosClienteNotFoundException;
+import br.com.brunadelmouro.msavaliadorcredito.exception.ErroComunicacaoMicroservicesException;
 import br.com.brunadelmouro.msavaliadorcredito.service.AvaliadorCreditoService;
 import br.com.brunadelmouro.msavaliadorcredito.model.SituacaoCliente;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +25,16 @@ public class AvaliadorCreditoController {
     }
 
     @GetMapping(value = "/situacao-cliente")
-    public ResponseEntity<SituacaoCliente> getCustomerSituation(@RequestParam("cpf") String cpf) {
-        final var response = avaliadorCreditoService.getCustomerSituation(cpf);
+    public ResponseEntity getCustomerSituation(@RequestParam("cpf") String cpf) {
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        try {
+            final var response = avaliadorCreditoService.getCustomerSituation(cpf);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch(DadosClienteNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (ErroComunicacaoMicroservicesException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.resolve(e.getStatus()));
+        }
     }
 }
