@@ -1,5 +1,6 @@
 package br.com.brunadelmouro.msavaliadorcredito.infra.clients;
 
+import br.com.brunadelmouro.msavaliadorcredito.model.Cartao;
 import br.com.brunadelmouro.msavaliadorcredito.model.CartaoCliente;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -16,4 +17,7 @@ public interface CartaoControllerClient {
 
     @GetMapping(params = "cpf")
     public ResponseEntity<List<CartaoCliente>> getCardsByCustomerCpf(@RequestParam("cpf") String cpf);
+
+    @GetMapping(params = "renda")
+    ResponseEntity<List<Cartao>> getCardsByIncomeLessThanEqual(@RequestParam("renda") Long renda);
 }
