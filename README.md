@@ -17,11 +17,18 @@ fornecer várias instâncias do mesmo e será gerenciado pelo eureka server.
 Microsserviço que realiza a lógica da aplicação para os tipos de pagamento, com as devidas regras de negócio e endpoints. Além disso, o microsserviço do tipo _client_ poderá 
 fornecer várias instâncias do mesmo e será gerenciado pelo eureka server.
 
+### :arrow_right: msavaliadorcredito: 
+Microsserviço que tem como principal função, realizar comunicações síncronas com o OpenFeign entre os microservices **msclientes** e **mscartoes**. Além disso, o microsserviço do tipo _client_ poderá 
+fornecer várias instâncias do mesmo e será gerenciado pelo eureka server.
+
 ----
 
 ## Arquitetura
 ![arquitetura_inicial](https://user-images.githubusercontent.com/61791877/195881284-7f691772-fec4-46dc-8500-f1cc1906994b.png)
 
+---
+
+### Seção 2 - Desenvolvendo a arquitetura de microservices
 
 ### Testando Load Balancer
 
@@ -29,3 +36,28 @@ fornecer várias instâncias do mesmo e será gerenciado pelo eureka server.
 2. Subir mscloudgateway
 3. Realizar uma requisição e observar por meio dos logs das 3 instâncias, em qual delas a requisição foi direcionada
 4. Realizar a ação novamente para observar tais comportamentos
+
+---
+
+### Seção 3 - Comunicação síncrona entre microservices
+
+**OpenFeign**
+
+É uma biblioteca pertencente ao Spring Cloud que consiste em realizar comunicações diretas entre microservices.
+
+Implementação:
+1. Inserir na classe de execução a seguinte anotação **@EnableFeignClients**
+
+2. Criar interface para agrupar a assinatura das requisições à serem consumidas
+
+    2.1 Anotar a interface com @FeignClient(value = "_referência microservice presente no load balancer do gateway(ou url="localhost:8080")_", path = "_endpoint a ser consumido_") 
+  
+    2.2 Adicioanar os contratos copiando a assinatura do método em que se deseja acessar
+
+---
+
+
+  
+  
+
+
