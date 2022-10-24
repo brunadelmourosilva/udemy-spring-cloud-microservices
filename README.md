@@ -56,6 +56,10 @@ Implementação:
 
 ---
 
+### Seção 4 - Comunicação assíncrona entre microservices
+
+(detalhes de cada tipo de exchange)
+
 
   
   
