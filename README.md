@@ -52,13 +52,18 @@ Implementação:
 
     2.1 Anotar a interface com @FeignClient(value = "_referência microservice presente no load balancer do gateway(ou url="localhost:8080")_", path = "_endpoint a ser consumido_") 
   
-    2.2 Adicioanar os contratos copiando a assinatura do método em que se deseja acessar
+    2.2 Adicionar os contratos copiando a assinatura do método em que se deseja acessar
 
 ---
 
 ### Seção 4 - Comunicação assíncrona entre microservices
 
-(detalhes de cada tipo de exchange)
+**RabbitMQ**
+
+Informações sobre cada tipo de exchange: https://github.com/azl6/udemy-rabbitmq
+
+Implementação para consumer:
+(continuar)
 
 
   
