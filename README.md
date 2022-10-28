@@ -60,11 +60,92 @@ Implementação:
 
 **RabbitMQ**
 
-Informações sobre cada tipo de exchange: https://github.com/azl6/udemy-rabbitmq
 
-Implementação para consumer:
-(continuar)
+-> Informações sobre cada tipo de exchange: https://github.com/azl6/udemy-rabbitmq
 
+-> Configs iniciais:
+
+- Comando para rodar Rabbit com Docker Run: ```docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.10-management```
+- Adicionar dependência do RabbitMQ no arquivo pom.xml
+- Adicionar dependência AMQP no arquivo pom.xml
+- Anotar classe da aplicação com ```@EnableRabbit```
+
+---
+
+-> Implementação para consumer:
+
+- Criar fila na interface do RabbitMQ
+
+- Configurar broker do RabbitMQ e associar o nome da fila criada no application.yaml, seguindo a estrutura:
+
+```
+spring:
+    application:
+        name: mscartoes
+    rabbit:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+mq:
+    queues:
+        nome-da-fila: nome-da-fila
+```        
+- Criar classe(s) listener com método para consumo da mensagem, exemplo: 
+
+```
+//chamar método em service-repository
+@RabbitListener(queues = "${mq.queues.nome-da-fila}")
+  public void receiveMessage(final Message message) throws IOException {
+    final var object = objectMapper.readValue(message.getBody(), CardEmissionRequestMessage.class);
+}
+```
+---
+
+-> Implementação para producer:
+
+- Replicar configurações realizadas no consumer
+
+- Adicionar classe de configuração para referência à fila do consumer, exemplo:
+
+```
+@Configuration
+public class RabbitConfig() {
+    
+    @Value("${mq.queues.nome-da-fila}")
+    private String nomeDaFila;
+    
+    @Bean
+    public Queue nomeDaFilaQueue(){
+        return new Queue(nomeDaFila, true);
+    }
+}
+
+```
+
+- Criar classe(s) producer com método para a publicação da mensagem, exemplo: 
+
+Injetar classes:
+```RabbitTemplate rabbitTemplate```
+```Queue queueName```
+```ObjectMapper objectMapper```
+
+```
+//chamar método em service - controller
+public void publishMessage(Objeto objeto) throws JsonProcessingException{
+    rabbitTemplate.convertAndSend(queueName, objectMapper.convertValueAsString(objeto));
+}
+```
+
+---
+prática
+-> Criar 3 MS's:
+
+obter dados por endpoint e publicar mensagem com Rabbit
+
+consumir mensagem e enviar mensagem para exchange
+
+salvar mensagem no banco de dados
 
   
   
