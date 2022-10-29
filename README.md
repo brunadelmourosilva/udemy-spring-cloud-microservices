@@ -74,7 +74,7 @@ Implementação:
 
 -> Implementação para consumer:
 
-- Criar fila na interface do RabbitMQ
+- Criar fila na interface do RabbitMQ e realizar o binding entre exchange e fila
 
 - Configurar broker do RabbitMQ e associar o nome da fila criada no application.yaml, seguindo a estrutura:
 
