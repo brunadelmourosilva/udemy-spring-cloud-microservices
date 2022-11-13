@@ -138,16 +138,7 @@ public void publishMessage(Objeto objeto) throws JsonProcessingException{
 ```
 
 ---
-prática
--> Criar 3 MS's:
 
-obter dados por endpoint e publicar mensagem com Rabbit
+Seção 5 - Segurança da API com keycloak
 
-consumir mensagem e enviar mensagem para exchange
-
-salvar mensagem no banco de dados
-
-  
-  
-
-
+Site: https://www.keycloak.org/getting-started/getting-started-docker
