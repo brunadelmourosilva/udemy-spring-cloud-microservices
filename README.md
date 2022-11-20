@@ -1,4 +1,4 @@
-# udemy-microservices
+# Curso: Domine microservicos e mensageria com Spring Cloud e Docker
 
 ## Microservices
 
@@ -146,7 +146,7 @@ Para criar um controle de acesso, é necessário criar um Realm. Tal recurso sig
 
 **Criar client para acessar aplicação**
 
-- Inserir o nome do clientID de acordo com o nome do microservice.
+- Inserir o nome do clientID de acordo com o nome do microservice, no caso usaremos o msavaliadorcredito.
 - Adicionar **openid-connect** para o campo Client Protocol.
 - Adicionar **confidential** para o campo Access Type.
 - Habilitar Service Accounts Enable.
@@ -186,3 +186,36 @@ Para criar um controle de acesso, é necessário criar um Realm. Tal recurso sig
     - Página do keycloak -> Clients -> microservice criado -> Settings -> Advanced Settings
 
 ---
+
+### Seção 6 - Outros recursos
+
+Nesta seção, iremos implementar o Spring Security no microservice eurekaserver, utilizando a autenticação do tipo basic.
+
+- Adicionar depêndencia do Spring Security microservice eurekaserver.
+
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+```
+
+- Adicionar configurações no application.yaml
+
+![image](https://user-images.githubusercontent.com/61791877/202927158-47d82f93-2be5-4229-8a4b-b64405b4f741.png)
+
+- Criar classe de configuração
+
+![image](https://user-images.githubusercontent.com/61791877/202927430-2830b785-e173-4bf2-80ce-d25c5c7e48ee.png)
+
+Com a implementação de autenticação no microservice eurekaserver, os demais microservices que tentarem se registrar, não terão permissão. Dessa forma, deve-se aplicar algumas configurações nos demais microservices para que os mesmos tenham acesso ao eurekaserer.
+
+- Adicionar user e password na url contida em **defaultZone** do application.yaml
+
+```
+http://username:password@localhost:8761/eureka
+```
+
+
+
