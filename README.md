@@ -70,8 +70,6 @@ Implementação:
 - Adicionar dependência AMQP no arquivo pom.xml
 - Anotar classe da aplicação com ```@EnableRabbit```
 
----
-
 -> Implementação para consumer:
 
 - Criar fila na interface do RabbitMQ e realizar o binding entre exchange e fila
@@ -100,7 +98,6 @@ mq:
     final var object = objectMapper.readValue(message.getBody(), CardEmissionRequestMessage.class);
 }
 ```
----
 
 -> Implementação para producer:
 
@@ -139,6 +136,53 @@ public void publishMessage(Objeto objeto) throws JsonProcessingException{
 
 ---
 
-Seção 5 - Segurança da API com keycloak
+### Seção 5 - Segurança da API com keycloak
 
 Site: https://www.keycloak.org/getting-started/getting-started-docker
+
+**REALM**
+
+Para criar um controle de acesso, é necessário criar um Realm. Tal recurso signifca uma aplicação, um conjunto de aplicações ou um domínio.
+
+**Criar client para acessar aplicação**
+
+- Inserir o nome do clientID de acordo com o nome do microservice.
+- Adicionar **openid-connect** para o campo Client Protocol.
+- Adicionar **confidential** para o campo Access Type.
+- Habilitar Service Accounts Enable.
+- Habilitar Authorization Enable.
+- Inserir URL http://localhost:8080 para o campo Valid Redirect URIs.
+
+**Configurando microservice para conectar-se ao keycloak**
+
+- Adicionar dependência:
+
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+</dependency>
+```
+
+- Buscar informações na página do keycloak: Realm Settings -> OpenID Endpoint Configuration
+
+- Adicionar configuração para application.yaml:
+
+![image](https://user-images.githubusercontent.com/61791877/202879129-8e7e911b-f51a-4319-98a9-b18d133aafcf.png)
+
+**Testes**
+
+- Obter token do keycloak no Postaman: 
+
+    - Authorization
+    - Grant Type(Client Credentials)
+    - Página do keycloak -> Realm Settings -> OpenID Endpoint Configuration -> token_endpoint
+    - Inserir token no campo Access Token URL
+    - Página do keycloak -> Clients -> microservice criado -> Settings(obter Client ID) -> Credentials(obter Client Secret)
+    - Gerar token e utilizar o mesmo nas requisições
+
+- Estender tempo de expiração do token
+
+    - Página do keycloak -> Clients -> microservice criado -> Settings -> Advanced Settings
+
+---
