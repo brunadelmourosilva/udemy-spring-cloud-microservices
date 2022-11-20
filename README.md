@@ -217,5 +217,5 @@ Com a implementação de autenticação no microservice eurekaserver, os demais 
 http://username:password@localhost:8761/eureka
 ```
 
-
+_replicar seções 5 e 6 nos microservices_
 
