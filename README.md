@@ -189,9 +189,11 @@ Para criar um controle de acesso, é necessário criar um Realm. Tal recurso sig
 
 ### Seção 6 - Outros recursos
 
-Nesta seção, iremos implementar o Spring Security no microservice eurekaserver, utilizando a autenticação do tipo basic.
+Nesta seção, iremos implementar o Spring Security no microservice eurekaserver, utilizando a autenticação do tipo basic. Ademais, iremos aprender outros recursos, tais como logs, actuator e documentação de API's.
 
-- Adicionar depêndencia do Spring Security microservice eurekaserver.
+**Spring security**
+
+- Adicionar depêndencia do Spring Security microservice eurekaserver
 
 ```
 <dependency>
@@ -215,7 +217,34 @@ Com a implementação de autenticação no microservice eurekaserver, os demais 
 
 ```
 http://username:password@localhost:8761/eureka
+
 ```
+
+**Logs**
+
+```
+private static final Logger log = LoggerFactory.getLogger(ClassName.class)
+```
+
+**Acutator**
+
+Corresponde ao monitoramento dos microservices através da exposição de endpoints.
+
+- Adicionar dependência do actuator
+
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+```
+
+- Adicionar configurações para actuator e logs no application.yaml
+
+![image](https://user-images.githubusercontent.com/61791877/203884906-5a58bc1f-fb47-4f0e-b81f-104830347a0c.png)
+
+- Acessar URL do microservice através do eureka: localhost:xxxx/actuator
 
 _replicar seções 5 e 6 nos microservices_
 
