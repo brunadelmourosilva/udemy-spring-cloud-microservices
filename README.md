@@ -246,5 +246,9 @@ Corresponde ao monitoramento dos microservices através da exposição de endpoi
 
 - Acessar URL do microservice através do eureka: localhost:xxxx/actuator
 
+**OpenAPI e Swagger**
+
+https://springdoc.org/
+
 _replicar seções 5 e 6 nos microservices_
 
