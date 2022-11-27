@@ -250,5 +250,57 @@ Corresponde ao monitoramento dos microservices através da exposição de endpoi
 
 https://springdoc.org/
 
+---
+
+### Seção 7 - arquitetura completa com Docker
+
+dockerhub: https://hub.docker.com/u/brunadelmouro
+
+**Construindo imagens para os microservices**
+
+- Gerar .jar do projeto(pasta target), com o comando(raiz do projeto):
+Para windows
+```
+./mvnw clean package --DskipTests
+```
+
+- Verificar se o jar do microservice gerado está funcionando:
+
+```
+cd target
+```
+
+```
+java -jar .\nome-do-jar.jar
+```
+
+- Na raiz do projeto, criar o Dockerfile, contendo as instruções para rodar o microservice
+
+```
+FROM openjdk:11
+WORKDIR /app
+COPY ./target/nome-do-jar app.jar
+EXPOSE 8761
+ENTRYPOINT java -jar app.jar
+```
+
+- Fazer build da imagem
+
+```
+docker build --tag nome-da-imagem:1.0 .
+```
+
+- Testar imagem
+
+```
+docker run --name nome-do-container -p 8761:8761 nome-da-imagem
+```
+
+- Subir imagem para o DockerHub
+
+
+- Para criar uma arquitetura completa, por exemplo, preciso rodar imagens de 2 microservices e rabbitMQ. Para isso, pode-se utilizar o docker-compose.yaml, que agrupará todo esse conjunto. Lembrando que os microservices devem estar no DockerHub.
+
+
 _replicar seções 5 e 6 nos microservices_
 
