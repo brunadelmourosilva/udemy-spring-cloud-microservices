@@ -301,6 +301,10 @@ docker run --name nome-do-container -p 8761:8761 nome-da-imagem
 
 - Para criar uma arquitetura completa, por exemplo, preciso rodar imagens de 2 microservices e rabbitMQ. Para isso, pode-se utilizar o docker-compose.yaml, que agrupará todo esse conjunto. Lembrando que os microservices devem estar no DockerHub.
 
+**Automatização de build das imagens**
+
+**Problema na conversação entre containers**
+
 fazer novamente o conteudo perdido de automatização de imagens.
 
 
