@@ -138,7 +138,7 @@ public void publishMessage(Objeto objeto) throws JsonProcessingException{
 
 ### Seção 5 - Segurança da API com keycloak
 
-Site: https://www.keycloak.org/getting-started/getting-started-docker
+Startar container do keycloak: https://www.keycloak.org/getting-started/getting-started-docker
 
 **REALM**
 
@@ -356,6 +356,31 @@ docker run --name nome-do-container -p 8761:8761 --network nome-da-network nome-
 
 **Criando variáveis de ambiente para referenciar containers**
 
+- Formato de variáveis no Spring
 
-_replicar seções 5 e 6 nos microservices_
+exemplos
+```
+${RABBITMQ_SERVER}
+${EUREKA_SERVER}
+```
+
+- Para o Dockerfile(lembrar de reconstruir imagem)
+
+```
+ARG RABBITMQ_SERVER=rabbitmq-host
+ARG EUREKA_SERVER=localhost
+```
+
+- Para executar
+
+```
+docker run --name nome-do-container 
+-p 8761:8761 
+--network nome-da-network 
+-e RABBITMQ_SERVER=nome-do-container
+-e EUREKA_SERVER=nome-do-container
+nome-da-imagem
+```
+
+_replicar seções 5 em diante_
 
