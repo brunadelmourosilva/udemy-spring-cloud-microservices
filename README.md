@@ -298,10 +298,36 @@ docker run --name nome-do-container -p 8761:8761 nome-da-imagem
 
 - Subir imagem para o DockerHub
 
-
 - Para criar uma arquitetura completa, por exemplo, preciso rodar imagens de 2 microservices e rabbitMQ. Para isso, pode-se utilizar o docker-compose.yaml, que agrupará todo esse conjunto. Lembrando que os microservices devem estar no DockerHub.
 
 **Automatização de build das imagens**
+
+- Na raiz do projeto, criar o Dockerfile, contendo as instruções para rodar o maven e microservice
+
+```
+FROM maven:3.8.5-openjdk-11 as build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+FROM openjdk:11
+WORKDIR /app
+COPY --from=build ./app/target/*.jar ./app.jar
+EXPOSE 8761
+ENTRYPOINT java -jar app.jar
+```
+
+- Fazer build da imagem
+
+```
+docker build --tag nome-da-imagem:1.0 .
+```
+
+- Testar imagem
+
+```
+docker run --name nome-do-container -p 8761:8761 nome-da-imagem
+```
 
 **Problema na conversação entre containers**
 
