@@ -331,7 +331,30 @@ docker run --name nome-do-container -p 8761:8761 nome-da-imagem
 
 **Problema na conversação entre containers**
 
-fazer novamente o conteudo perdido de automatização de imagens.
+Por padrão, containers rodam de maneia isolada. Para o exemplo do projeto, quando o microservice precisa se registrar no microservice do eureka server, não há um canal de conexão para que isso aconteça, pois o mesmo aponta para localhost. Para isso, é necessário criar uma NETWORK, onde todos os containers estarão conectados a mesma rede e poderão se comunicarem.
+
+- Por padrão, o nome do host(nome do container) será usado para substituir o localhost referenciado nos MS's, é o nome do container
+
+- Para criar a network
+
+```
+docker network create nome-da-network
+```
+
+- Para visualizar a network
+
+```
+docker network ls
+```
+
+- Agora, cada container deverá ser iniciado seguindo a conexão com a Network criada
+
+
+```
+docker run --name nome-do-container -p 8761:8761 --network nome-da-network nome-da-imagem
+```
+
+**Criando variáveis de ambiente para referenciar containers**
 
 
 _replicar seções 5 e 6 nos microservices_
