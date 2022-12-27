@@ -172,7 +172,7 @@ Para criar um controle de acesso, é necessário criar um Realm. Tal recurso sig
 
 **Testes**
 
-- Obter token do keycloak no Postaman: 
+- Obter token do keycloak no Postman: 
 
     - Authorization
     - Grant Type(Client Credentials)
